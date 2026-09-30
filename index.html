@@ -1,204 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        * { font-family: 'Inter', sans-serif; }
-        body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            min-height: 100vh;
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        .gradient-text {
-            background: linear-gradient(90deg, #f7971e, #ffd200);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Artist dashboard for Engr La2ry Nix">
+  <title>Artist Dashboard ft AI | Engr La2ry Nix</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Engr La2ry Nix",
+    "jobTitle": "Artist and Creative Engineer",
+    "description": "Artist working across digital studies, mixed media, and creative technology.",
+    "url": "./",
+    "sameAs": []
+  }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+    :root { --ink:#07111f; --muted:#94a3b8; --line:#263449; --green:#b8ed3f; --blue:#4f8cff; --panel:#111e30; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:#eef4fb; background:#07111f; font-family:'Space Grotesk',sans-serif; }
+    button,input { font:inherit; } button { cursor:pointer; }
+    .mono { font-family:'DM Mono',monospace; }
+    .sidebar { background:#0b1728; border-right:1px solid var(--line); }
+    .nav-link { color:#91a0b6; border:1px solid transparent; }
+    .nav-link:hover,.nav-link.active { color:#fff; background:#14243a; border-color:#30425b; }
+    .nav-link.active:before,.nav-link:not(.active):before { content:''; width:6px; height:6px; display:inline-block; margin-right:9px; border-radius:50%; }
+    .nav-link.active:before { background:var(--green); } .nav-link:not(.active):before { background:#52647e; }
+    .panel { background:rgba(17,30,48,.9); border:1px solid var(--line); box-shadow:0 18px 42px rgba(0,0,0,.18); }
+    .metric { background:#112239; border:1px solid var(--line); }
+    .metric-value { letter-spacing:-.06em; }
+    .chart { background:repeating-linear-gradient(to bottom,transparent 0,transparent 52px,rgba(148,163,184,.12) 53px); }
+    .bar { background:var(--blue); border-radius:6px 6px 0 0; } .bar.highlight { background:var(--green); }
+    .art-one { background:linear-gradient(135deg,#bddcff 0 48%,#6178ff 48%); }
+    .art-two { background:radial-gradient(circle at 30% 30%,#ffc09e 0 20%,transparent 21%),linear-gradient(135deg,#f3d5a9,#ef7055); }
+    .art-three { background:linear-gradient(135deg,#d5f454 0 40%,#16263a 40% 72%,#9fc4fb 72%); }
+    .work { border:1px solid var(--line); background:#0e1b2c; }
+    .bubble.ai { background:#1b2d45; border:1px solid #34506f; } .bubble.user { color:var(--ink); background:var(--green); }
+    .filter { color:#9eacc0; border:1px solid var(--line); } .filter.active,.filter:hover { color:#fff; border-color:#8ea3bf; background:#1b2c43; }
+    @media (max-width:900px) { .shell { display:block !important; } .sidebar { border-right:0; border-bottom:1px solid var(--line); } .profile { display:none; } .nav { display:flex; overflow:auto; } .nav-link { white-space:nowrap; } }
+    @media (max-width:640px) { .content { padding:22px 15px !important; } .metric-grid { grid-template-columns:repeat(2,1fr) !important; } .dashboard-grid { grid-template-columns:1fr !important; } .portfolio { grid-column:auto !important; } .work-grid { grid-template-columns:1fr !important; } }
+  </style>
 </head>
-<body class="text-white">
-    <div class="max-w-7xl mx-auto px-4 py-8">
-        <!-- Header -->
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
-            <div>
-                <h1 class="text-4xl md:text-5xl font-bold gradient-text">🎨 Artist Dashboard</h1>
-                <p class="text-gray-400 mt-2 text-lg">Your creative command center</p>
-            </div>
-            <div class="mt-4 md:mt-0 flex items-center gap-4">
-                <div class="flex -space-x-2">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 border-2 border-gray-800 flex items-center justify-center text-sm font-bold">AM</div>
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-teal-400 border-2 border-gray-800 flex items-center justify-center text-sm font-bold">LJ</div>
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-400 border-2 border-gray-800 flex items-center justify-center text-sm font-bold">KR</div>
-                </div>
-                <button class="glass px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-white/10 transition">+ Invite</button>
-            </div>
-        </header>
-
-        <!-- Stats Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <div class="glass rounded-2xl p-6 card-hover">
-                <div class="flex items-center justify-between mb-4">
-                    <p class="text-gray-400 text-sm">Total Artworks</p>
-                    <span class="text-2xl">🖼️</span>
-                </div>
-                <p class="text-3xl font-bold">247</p>
-                <p class="text-emerald-400 text-sm mt-1">↑ 12% this month</p>
-            </div>
-            <div class="glass rounded-2xl p-6 card-hover">
-                <div class="flex items-center justify-between mb-4">
-                    <p class="text-gray-400 text-sm">Active Projects</p>
-                    <span class="text-2xl">🎯</span>
-                </div>
-                <p class="text-3xl font-bold">14</p>
-                <p class="text-emerald-400 text-sm mt-1">↑ 3 new this week</p>
-            </div>
-            <div class="glass rounded-2xl p-6 card-hover">
-                <div class="flex items-center justify-between mb-4">
-                    <p class="text-gray-400 text-sm">Studio Hours</p>
-                    <span class="text-2xl">⏱️</span>
-                </div>
-                <p class="text-3xl font-bold">128h</p>
-                <p class="text-emerald-400 text-sm mt-1">↑ 8% vs last week</p>
-            </div>
-            <div class="glass rounded-2xl p-6 card-hover">
-                <div class="flex items-center justify-between mb-4">
-                    <p class="text-gray-400 text-sm">Followers</p>
-                    <span class="text-2xl">🌟</span>
-                </div>
-                <p class="text-3xl font-bold">3,842</p>
-                <p class="text-emerald-400 text-sm mt-1">↑ 156 new</p>
-            </div>
-        </div>
-
-        <!-- Main Content -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-            <!-- Portfolio Preview -->
-            <div class="lg:col-span-2 glass rounded-2xl p-6 card-hover">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-semibold">🖌️ Recent Works</h2>
-                    <a href="#" class="text-purple-400 hover:text-purple-300 text-sm font-medium">View all →</a>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="aspect-square rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌅</div>
-                    <div class="aspect-square rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌊</div>
-                    <div class="aspect-square rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌺</div>
-                    <div class="aspect-square rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌿</div>
-                    <div class="aspect-square rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">✨</div>
-                    <div class="aspect-square rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌙</div>
-                </div>
-            </div>
-
-            <!-- Activity Feed -->
-            <div class="glass rounded-2xl p-6 card-hover">
-                <h2 class="text-xl font-semibold mb-6">📋 Recent Activity</h2>
-                <div class="space-y-5">
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0">🎨</div>
-                        <div>
-                            <p class="text-sm font-medium">New painting uploaded</p>
-                            <p class="text-xs text-gray-400 mt-0.5">"Abstract Dreams" • 2h ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">💬</div>
-                        <div>
-                            <p class="text-sm font-medium">Comment on "Ocean View"</p>
-                            <p class="text-xs text-gray-400 mt-0.5">"Stunning work!" • 4h ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">⭐</div>
-                        <div>
-                            <p class="text-sm font-medium">Reached 3.8K followers</p>
-                            <p class="text-xs text-gray-400 mt-0.5">Milestone unlocked! • 1d ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center shrink-0">🏆</div>
-                        <div>
-                            <p class="text-sm font-medium">Art contest entry accepted</p>
-                            <p class="text-xs text-gray-400 mt-0.5">Digital Art Expo 2026 • 2d ago</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tools & Skills -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-            <div class="glass rounded-2xl p-6 card-hover">
-                <h2 class="text-xl font-semibold mb-5">🛠️ Tools & Mediums</h2>
-                <div class="flex flex-wrap gap-3">
-                    <span class="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 text-sm">Procreate</span>
-                    <span class="px-4 py-2 rounded-full bg-blue-500/20 text-blue-300 text-sm">Photoshop</span>
-                    <span class="px-4 py-2 rounded-full bg-teal-500/20 text-teal-300 text-sm">Watercolor</span>
-                    <span class="px-4 py-2 rounded-full bg-orange-500/20 text-orange-300 text-sm">Oil Paint</span>
-                    <span class="px-4 py-2 rounded-full bg-pink-500/20 text-pink-300 text-sm">Digital</span>
-                    <span class="px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-300 text-sm">Acrylic</span>
-                    <span class="px-4 py-2 rounded-full bg-yellow-500/20 text-yellow-300 text-sm">Charcoal</span>
-                    <span class="px-4 py-2 rounded-full bg-indigo-500/20 text-indigo-300 text-sm">Blender 3D</span>
-                </div>
-            </div>
-            <div class="glass rounded-2xl p-6 card-hover">
-                <h2 class="text-xl font-semibold mb-5">📅 Upcoming Events</h2>
-                <div class="space-y-4">
-                    <div class="flex items-center gap-4">
-                        <div class="text-center">
-                            <p class="text-lg font-bold">15</p>
-                            <p class="text-xs text-gray-400">OCT</p>
-                        </div>
-                        <div class="w-px h-10 bg-white/10"></div>
-                        <div>
-                            <p class="text-sm font-medium">Gallery Opening Night</p>
-                            <p class="text-xs text-gray-400">Downtown Art Gallery • 7 PM</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="text-center">
-                            <p class="text-lg font-bold">22</p>
-                            <p class="text-xs text-gray-400">OCT</p>
-                        </div>
-                        <div class="w-px h-10 bg-white/10"></div>
-                        <div>
-                            <p class="text-sm font-medium">Live Studio Session</p>
-                            <p class="text-xs text-gray-400">YouTube / Twitch • 3 PM</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="text-center">
-                            <p class="text-lg font-bold">05</p>
-                            <p class="text-xs text-gray-400">NOV</p>
-                        </div>
-                        <div class="w-px h-10 bg-white/10"></div>
-                        <div>
-                            <p class="text-sm font-medium">Art Submission Deadline</p>
-                            <p class="text-xs text-gray-400">Annual Art Expo • Digital entry</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="text-center text-gray-500 text-sm py-6 border-t border-white/5">
-            <p>Made with 🎨 passion • Artist Dashboard 2026</p>
-        </footer>
-    </div>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="shell min-h-screen grid grid-cols-[250px_1fr]">
+    <aside class="sidebar flex min-h-screen flex-col p-5 lg:p-7">
+      <div class="flex items-center gap-3 border-b border-slate-700/60 pb-7"><div class="grid h-10 w-10 place-items-center rounded-xl bg-lime-300 font-bold text-slate-950">LN</div><div><strong class="block text-sm">Engr La2ry Nix</strong><small class="mono text-[10px] text-slate-400">artist dashboard / v0.1</small></div></div>
+      <span class="mono mt-7 text-[10px] uppercase tracking-[.14em] text-slate-500">Workspace</span>
+      <nav class="nav mt-3 grid gap-2" aria-label="Main navigation"><a class="nav-link active rounded-lg px-3 py-2.5 text-sm" href="#overview">Overview</a><a class="nav-link rounded-lg px-3 py-2.5 text-sm" href="#portfolio">Portfolio</a><a class="nav-link rounded-lg px-3 py-2.5 text-sm" href="#ai-assistant">AI assistant</a><a class="nav-link rounded-lg px-3 py-2.5 text-sm" href="#activity">Activity</a></nav>
+      <div class="profile mt-auto flex items-center gap-3 border-t border-slate-700/60 pt-5"><div class="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-lime-300 to-blue-500 text-xs font-bold text-slate-950">LN</div><div><strong class="block text-xs">ominous-parakeet</strong><small class="text-[11px] text-slate-400"><span class="text-lime-300">●</span> Workspace live</small></div></div>
+    </aside>
+    <main id="main-content" class="content min-w-0 px-5 py-7 lg:px-14 lg:py-9">
+      <header id="overview" class="mb-8 flex items-start justify-between gap-5 max-sm:block"><div><span class="mono text-[10px] uppercase tracking-[.14em] text-slate-500">Wednesday / September 30, 2026</span><h1 class="mt-2 text-4xl font-semibold tracking-[-.06em] sm:text-5xl">Good morning, La2ry.</h1><p class="mt-2 text-sm text-slate-400">Your creative practice is moving well. Here is the signal from this week.</p></div><div class="flex gap-2 max-sm:mt-5"><button id="exportBtn" class="rounded-lg border border-slate-600 bg-slate-900 px-3 py-2 text-xs hover:border-slate-300" type="button">↓ Export report</button><button id="newWorkBtn" class="rounded-lg bg-lime-300 px-3 py-2 text-xs font-semibold text-slate-950 hover:bg-lime-200" type="button">＋ New work</button></div></header>
+      <section class="info-band" aria-label="Artist information">
+        <article class="panel rounded-xl p-5" id="about"><span class="mono text-[10px] uppercase tracking-wider text-lime-300">About</span><h2 class="mt-2 font-semibold">Making systems feel human.</h2><p class="mt-2 text-xs leading-relaxed text-slate-400">La2ry Nix combines engineering discipline with tactile visual research, turning everyday signals into expressive work.</p></article>
+        <article class="panel rounded-xl p-5" id="career"><span class="mono text-[10px] uppercase tracking-wider text-lime-300">Career</span><h2 class="mt-2 font-semibold">Independent practice</h2><p class="mt-2 text-xs leading-relaxed text-slate-400">Creative engineer, visual artist, and collaborator building thoughtful digital experiences since 2021.</p></article>
+        <article class="panel rounded-xl p-5" id="shows"><span class="mono text-[10px] uppercase tracking-wider text-lime-300">Upcoming shows</span><h2 class="mt-2 font-semibold">Open studio · October 12</h2><p class="mt-2 text-xs leading-relaxed text-slate-400">A small public viewing of Field Notes 04 and the latest mixed-media studies.</p></article>
+      </section>
+      <section class="metric-grid mb-7 grid grid-cols-4 gap-3" aria-label="Performance metrics"><article class="metric rounded-xl p-4"><span class="mono text-[10px] uppercase tracking-wider text-slate-400">Audience reach</span><div class="metric-value my-3 text-3xl font-semibold">24.8k</div><span class="text-xs text-lime-300">↑ 18.4% this month</span></article><article class="metric rounded-xl p-4"><span class="mono text-[10px] uppercase tracking-wider text-slate-400">Portfolio views</span><div class="metric-value my-3 text-3xl font-semibold">8,492</div><span class="text-xs text-lime-300">↑ 11.2% this month</span></article><article class="metric rounded-xl p-4"><span class="mono text-[10px] uppercase tracking-wider text-slate-400">Open commissions</span><div class="metric-value my-3 text-3xl font-semibold">07</div><span class="text-xs text-lime-300">↑ 2 since last week</span></article><article class="metric rounded-xl p-4"><span class="mono text-[10px] uppercase tracking-wider text-slate-400">Creative streak</span><div class="metric-value my-3 text-3xl font-semibold">14 days</div><span class="text-xs text-lime-300">Personal best</span></article></section>
+      <div class="dashboard-grid grid grid-cols-[minmax(0,1.45fr)_minmax(280px,.8fr)] gap-4">
+        <section class="panel rounded-xl p-5" aria-labelledby="analytics-title"><div class="mb-5 flex justify-between gap-3"><div><h2 id="analytics-title" class="font-semibold">Audience momentum</h2><p class="mt-1 text-xs text-slate-400">Reach across your public channels</p></div><button class="rounded-md border border-slate-600 px-2 py-1 text-xs text-slate-400" type="button">Last 7 days⌄</button></div><div class="chart flex h-56 items-end gap-2 border-b border-slate-700/70 px-1 pt-5"><div class="bar-wrap flex h-full flex-1 flex-col justify-end items-center gap-2"><div class="bar w-3/5" style="height:35%"></div><span class="mono text-[9px] text-slate-500">MON</span></div><div class="bar-wrap flex h-full flex-1 flex-col justify-end items-center gap-2"><div class="bar w-3/5" style="height:48%"></div><span class="mono text-[9px] text-slate-500">TUE</span></div><div class="bar-wrap flex h-full flex-1 flex-col justify-end items-center gap-2"><div class="bar w-3/5" style="height:42%"></div><span class="mono text-[9px] text-slate-500">WED</span></div><div class="bar-wrap flex h-full flex-1 flex-col justify-end items-center gap-2"><div class="bar w-3/5" style="height:61%"></div><span class="mono text-[9px] text-slate-500">THU</span></div><div class="bar-wrap flex h-full flex-1 flex-col justify-end items-center gap-2"><div class="bar w-3/5" style="height:58%"></div><span class="mono text-[9px] text-slate-500">FRI</span></div><div class="bar-wrap flex h-full flex-1 flex-col justify-end items-center gap-2"><div class="bar highlight w-3/5" style="height:86%"></div><span class="mono text-[9px] text-slate-500">SAT</span></div><div class="bar-wrap flex h-full flex-1 flex-col justify-end items-center gap-2"><div class="bar w-3/5" style="height:70%"></div><span class="mono text-[9px] text-slate-500">SUN</span></div></div></section>
+        <section class="panel assistant rounded-xl p-5" id="ai-assistant" aria-labelledby="assistant-title"><div class="mb-4"><span class="mono text-[10px] uppercase tracking-wider text-lime-300">Creative copilot</span><h2 id="assistant-title" class="mt-1 font-semibold">Ask your studio</h2><p class="mt-1 text-xs text-slate-400">A small prompt can unlock the next move.</p></div><div id="chat" class="flex min-h-[220px] flex-col gap-3"><div class="bubble ai max-w-[90%] rounded-lg p-3 text-xs leading-relaxed">You have a strong audience signal this week. Want to shape it into a release plan?</div><div class="bubble user max-w-[90%] self-end rounded-lg p-3 text-xs leading-relaxed">Give me a concise content idea.</div><div class="bubble ai max-w-[90%] rounded-lg p-3 text-xs leading-relaxed">Make a 3-part studio diary: process, one honest failure, then the finished piece.</div></div><form id="chatForm" class="mt-4 flex gap-2"><input id="chatInput" class="min-w-0 flex-1 rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-xs text-white outline-none focus:border-lime-300" aria-label="Ask the creative copilot" placeholder="Ask anything about your practice..." autocomplete="off"><button class="rounded-lg bg-lime-300 px-3 font-bold text-slate-950" aria-label="Send message" type="submit">→</button></form></section>
+        <section class="panel portfolio col-span-full rounded-xl p-5" id="portfolio"><div class="mb-5 flex flex-wrap items-start justify-between gap-3"><div><h2 class="font-semibold">Selected work</h2><p class="mt-1 text-xs text-slate-400">Your latest pieces and their current status</p></div><div class="filters flex gap-2"><button class="filter active rounded-full px-3 py-1 text-xs" data-filter="all" type="button">All</button><button class="filter rounded-full px-3 py-1 text-xs" data-filter="live" type="button">Live</button><button class="filter rounded-full px-3 py-1 text-xs" data-filter="draft" type="button">Drafts</button></div></div><div class="work-grid grid grid-cols-3 gap-3"><article class="work rounded-lg overflow-hidden" data-status="live"><div class="art-one grid aspect-[1.45] place-items-center text-center text-2xl font-bold tracking-[-.08em] text-slate-950">FORM<br>02</div><div class="flex justify-between gap-2 p-3"><div><strong class="text-xs">Form / Tension</strong><small class="mt-1 block text-[10px] text-slate-400">Digital study · 2026</small></div><span class="h-fit rounded bg-lime-200 px-2 py-1 mono text-[9px] uppercase text-slate-950">Live</span></div></article><article class="work rounded-lg overflow-hidden" data-status="live"><div class="art-two grid aspect-[1.45] place-items-center text-center text-2xl font-bold tracking-[-.08em] text-slate-950">SOFT<br>NOISE</div><div class="flex justify-between gap-2 p-3"><div><strong class="text-xs">Soft Noise</strong><small class="mt-1 block text-[10px] text-slate-400">Mixed media · 2026</small></div><span class="h-fit rounded bg-lime-200 px-2 py-1 mono text-[9px] uppercase text-slate-950">Live</span></div></article><article class="work rounded-lg overflow-hidden" data-status="draft"><div class="art-three grid aspect-[1.45] place-items-center text-center text-2xl font-bold tracking-[-.08em] text-slate-950">FIELD<br>NOTES</div><div class="flex justify-between gap-2 p-3"><div><strong class="text-xs">Field Notes 04</strong><small class="mt-1 block text-[10px] text-slate-400">Ongoing series · 2026</small></div><span class="h-fit rounded bg-amber-100 px-2 py-1 mono text-[9px] uppercase text-amber-900">Draft</span></div></article></div></section>
+        <section class="panel rounded-xl p-5" id="activity"><div class="mb-4"><h2 class="font-semibold">Studio activity</h2><p class="mt-1 text-xs text-slate-400">The latest movements in your workspace</p></div><div class="space-y-3 text-xs"><div class="flex gap-3 border-b border-slate-700/60 pb-3"><span class="mt-1 h-2 w-2 rounded-full bg-blue-400"></span><p><strong>Form / Tension</strong> received 124 new views.<small class="mono mt-1 block text-[10px] text-slate-500">2 hours ago</small></p></div><div class="flex gap-3 border-b border-slate-700/60 pb-3"><span class="mt-1 h-2 w-2 rounded-full bg-orange-400"></span><p><strong>New commission request</strong> from M. Okafor.<small class="mono mt-1 block text-[10px] text-slate-500">Yesterday, 16:42</small></p></div><div class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-violet-400"></span><p><strong>Field Notes 04</strong> was added to drafts.<small class="mono mt-1 block text-[10px] text-slate-500">Yesterday, 09:10</small></p></div></div></section>
+      </div>
+    </main>
+  </div>
+  <footer class="site-footer"><span>© 2026 Engr La2ry Nix · Artist Dashboard ft AI</span><a href="#overview">Back to overview ↑</a></footer>
+  <script>
+    const filters = document.querySelectorAll('.filter');
+    const works = document.querySelectorAll('.work');
+    filters.forEach((filter) => filter.addEventListener('click', () => {
+      filters.forEach((item) => item.classList.remove('active'));
+      filter.classList.add('active');
+      works.forEach((work) => { work.hidden = filter.dataset.filter !== 'all' && work.dataset.status !== filter.dataset.filter; });
+    }));
+    document.getElementById('newWorkBtn').addEventListener('click', () => document.getElementById('portfolio').scrollIntoView({ behavior:'smooth' }));
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(new Blob(['Engr La2ry Nix - Studio report\nAudience reach: 24.8k\nPortfolio views: 8,492\nOpen commissions: 07'], { type:'text/plain' }));
+      link.download = 'la2ry-nix-studio-report.txt'; link.click(); URL.revokeObjectURL(link.href);
+    });
+    document.getElementById('chatForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = document.getElementById('chatInput'); const prompt = input.value.trim(); if (!prompt) return;
+      const chat = document.getElementById('chat'); const userBubble = document.createElement('div'); userBubble.className = 'bubble user max-w-[90%] self-end rounded-lg p-3 text-xs leading-relaxed'; userBubble.textContent = prompt; chat.appendChild(userBubble); input.value = '';
+      setTimeout(() => { const reply = document.createElement('div'); reply.className = 'bubble ai max-w-[90%] rounded-lg p-3 text-xs leading-relaxed'; reply.textContent = 'Try documenting the decision behind the piece, not just the finished image. That story is your strongest next post.'; chat.appendChild(reply); }, 350);
+    });
+  </script>
 </body>
 </html>

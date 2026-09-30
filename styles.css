@@ -1,0 +1,48 @@
+/* Shared presentation for the artist dashboard landmarks and content sections. */
+:root {
+  --focus-ring: #d6f454;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 10;
+  padding: .7rem 1rem;
+  color: #07111f;
+  background: var(--focus-ring);
+  border-radius: .5rem;
+}
+
+.skip-link:focus { top: 1rem; }
+
+.site-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 2rem;
+  color: #94a3b8;
+  background: #0b1728;
+  border-top: 1px solid #263449;
+  font-size: .75rem;
+}
+
+.info-band {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.info-band article { min-height: 8rem; }
+
+@media (max-width: 640px) {
+  .info-band { grid-template-columns: 1fr; }
+  .site-footer { display: block; padding: 1rem; }
+}
