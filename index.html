@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #f7971e, #ffd200);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
+            <div>
+                <h1 class="text-4xl md:text-5xl font-bold gradient-text">🎨 Artist Dashboard</h1>
+                <p class="text-gray-400 mt-2 text-lg">Your creative command center</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center gap-4">
+                <div class="flex -space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 border-2 border-gray-800 flex items-center justify-center text-sm font-bold">AM</div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-teal-400 border-2 border-gray-800 flex items-center justify-center text-sm font-bold">LJ</div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-400 border-2 border-gray-800 flex items-center justify-center text-sm font-bold">KR</div>
+                </div>
+                <button class="glass px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-white/10 transition">+ Invite</button>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <div class="glass rounded-2xl p-6 card-hover">
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-gray-400 text-sm">Total Artworks</p>
+                    <span class="text-2xl">🖼️</span>
+                </div>
+                <p class="text-3xl font-bold">247</p>
+                <p class="text-emerald-400 text-sm mt-1">↑ 12% this month</p>
+            </div>
+            <div class="glass rounded-2xl p-6 card-hover">
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-gray-400 text-sm">Active Projects</p>
+                    <span class="text-2xl">🎯</span>
+                </div>
+                <p class="text-3xl font-bold">14</p>
+                <p class="text-emerald-400 text-sm mt-1">↑ 3 new this week</p>
+            </div>
+            <div class="glass rounded-2xl p-6 card-hover">
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-gray-400 text-sm">Studio Hours</p>
+                    <span class="text-2xl">⏱️</span>
+                </div>
+                <p class="text-3xl font-bold">128h</p>
+                <p class="text-emerald-400 text-sm mt-1">↑ 8% vs last week</p>
+            </div>
+            <div class="glass rounded-2xl p-6 card-hover">
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-gray-400 text-sm">Followers</p>
+                    <span class="text-2xl">🌟</span>
+                </div>
+                <p class="text-3xl font-bold">3,842</p>
+                <p class="text-emerald-400 text-sm mt-1">↑ 156 new</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+            <!-- Portfolio Preview -->
+            <div class="lg:col-span-2 glass rounded-2xl p-6 card-hover">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold">🖌️ Recent Works</h2>
+                    <a href="#" class="text-purple-400 hover:text-purple-300 text-sm font-medium">View all →</a>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="aspect-square rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌅</div>
+                    <div class="aspect-square rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌊</div>
+                    <div class="aspect-square rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌺</div>
+                    <div class="aspect-square rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌿</div>
+                    <div class="aspect-square rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">✨</div>
+                    <div class="aspect-square rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-6xl hover:scale-105 transition-transform cursor-pointer">🌙</div>
+                </div>
+            </div>
+
+            <!-- Activity Feed -->
+            <div class="glass rounded-2xl p-6 card-hover">
+                <h2 class="text-xl font-semibold mb-6">📋 Recent Activity</h2>
+                <div class="space-y-5">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0">🎨</div>
+                        <div>
+                            <p class="text-sm font-medium">New painting uploaded</p>
+                            <p class="text-xs text-gray-400 mt-0.5">"Abstract Dreams" • 2h ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">💬</div>
+                        <div>
+                            <p class="text-sm font-medium">Comment on "Ocean View"</p>
+                            <p class="text-xs text-gray-400 mt-0.5">"Stunning work!" • 4h ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">⭐</div>
+                        <div>
+                            <p class="text-sm font-medium">Reached 3.8K followers</p>
+                            <p class="text-xs text-gray-400 mt-0.5">Milestone unlocked! • 1d ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center shrink-0">🏆</div>
+                        <div>
+                            <p class="text-sm font-medium">Art contest entry accepted</p>
+                            <p class="text-xs text-gray-400 mt-0.5">Digital Art Expo 2026 • 2d ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools & Skills -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <div class="glass rounded-2xl p-6 card-hover">
+                <h2 class="text-xl font-semibold mb-5">🛠️ Tools & Mediums</h2>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 text-sm">Procreate</span>
+                    <span class="px-4 py-2 rounded-full bg-blue-500/20 text-blue-300 text-sm">Photoshop</span>
+                    <span class="px-4 py-2 rounded-full bg-teal-500/20 text-teal-300 text-sm">Watercolor</span>
+                    <span class="px-4 py-2 rounded-full bg-orange-500/20 text-orange-300 text-sm">Oil Paint</span>
+                    <span class="px-4 py-2 rounded-full bg-pink-500/20 text-pink-300 text-sm">Digital</span>
+                    <span class="px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-300 text-sm">Acrylic</span>
+                    <span class="px-4 py-2 rounded-full bg-yellow-500/20 text-yellow-300 text-sm">Charcoal</span>
+                    <span class="px-4 py-2 rounded-full bg-indigo-500/20 text-indigo-300 text-sm">Blender 3D</span>
+                </div>
+            </div>
+            <div class="glass rounded-2xl p-6 card-hover">
+                <h2 class="text-xl font-semibold mb-5">📅 Upcoming Events</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="text-center">
+                            <p class="text-lg font-bold">15</p>
+                            <p class="text-xs text-gray-400">OCT</p>
+                        </div>
+                        <div class="w-px h-10 bg-white/10"></div>
+                        <div>
+                            <p class="text-sm font-medium">Gallery Opening Night</p>
+                            <p class="text-xs text-gray-400">Downtown Art Gallery • 7 PM</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="text-center">
+                            <p class="text-lg font-bold">22</p>
+                            <p class="text-xs text-gray-400">OCT</p>
+                        </div>
+                        <div class="w-px h-10 bg-white/10"></div>
+                        <div>
+                            <p class="text-sm font-medium">Live Studio Session</p>
+                            <p class="text-xs text-gray-400">YouTube / Twitch • 3 PM</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="text-center">
+                            <p class="text-lg font-bold">05</p>
+                            <p class="text-xs text-gray-400">NOV</p>
+                        </div>
+                        <div class="w-px h-10 bg-white/10"></div>
+                        <div>
+                            <p class="text-sm font-medium">Art Submission Deadline</p>
+                            <p class="text-xs text-gray-400">Annual Art Expo • Digital entry</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm py-6 border-t border-white/5">
+            <p>Made with 🎨 passion • Artist Dashboard 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
